@@ -10,7 +10,7 @@ dotenv.config();
 app.use(express.json());
 
 // Connect to DB
-mongoose.connect("mongodb://localhost:27017/learnAppDB", {
+mongoose.connect(process.env.MONGO_SERVER, {
     useUnifiedTopology: true,
     useNewUrlParser: true
   },
@@ -89,20 +89,6 @@ const Subject = mongoose.model("Subject", subjectSchema);
 const Topic = mongoose.model("Topic", topicSchema);
 const Question = mongoose.model("Question", questionSchema);
 const Answer = mongoose.model("Answer", answerSchema);
-
-
-// const teacher = use foreign key of user
-// const student = user foreign key of user
-// route for teacher registration
-// const teachers = user
-// const subject = name, created by (teacher)
-// const topic = name, subject
-// topic, person sending the topic sends the topic name and subject id.
-// teacher should be able to create subject api/subjects/create only they should have access to this
-// Question collection. Topic, Asked by, date asked, question, answers
-// Answers collection. Question ID, answered by, correct(true or false)
-// Students can ask questions, anybody can suggest answer (default is false), only teacher can mark it as correct
-
 
 app.post("/api/questions/answer/verify", verifyToken, async (req, res) => {
   //Check if the person trying to access the route is a teacher
