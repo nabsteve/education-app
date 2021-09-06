@@ -90,6 +90,10 @@ const Topic = mongoose.model("Topic", topicSchema);
 const Question = mongoose.model("Question", questionSchema);
 const Answer = mongoose.model("Answer", answerSchema);
 
+app.get("/", (req, res) => {
+  res.send("This is the homepage!")
+})
+
 app.post("/api/questions/answer/verify", verifyToken, async (req, res) => {
   //Check if the person trying to access the route is a teacher
   const user = await User.findOne({
